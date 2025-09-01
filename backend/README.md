@@ -136,8 +136,7 @@ Base URL: http://localhost:8080/v1/api/tasks
      pending
      in-progress
      completed
-
-    EX:curl -X PATCH "http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000/status?status=completed"
+     EX:curl -X PATCH "http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000/status?status=completed"
 
 7. Delete a Task
    Delete a specific task by its UUID.
