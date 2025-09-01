@@ -20,9 +20,9 @@ H2 Database Console will be available at : http://localhost:8080/h2-console (JDB
 For API documentation:
   When the spring-boot application is running 
       then access the Swagger UI at:
-      - Swagger UI: http://localhost:8080/swagger-ui.html
-      - OpenAPI JSON: http://localhost:8080/v3/api-docs
-      - OpenAPI YAML: http://localhost:8080/v3/api-docs.yaml
+      -  Swagger UI: http://localhost:8080/swagger-ui.html
+      -  OpenAPI JSON: http://localhost:8080/v3/api-docs
+      -  OpenAPI YAML: http://localhost:8080/v3/api-docs.yaml
 
 
 How to use these REST APIs:
