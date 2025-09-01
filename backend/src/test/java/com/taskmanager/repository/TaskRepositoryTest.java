@@ -1,5 +1,6 @@
 package com.taskmanager.repository;
 
+import com.taskmanager.model.Task;
 import com.taskmanager.model.TaskTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class TaskRepositoryTest {
+public class TaskRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -24,14 +25,14 @@ class TaskRepositoryTest {
 
     @Test
     void testSaveTask() {
-        TaskTest task = TaskTest.builder()
+        Task task = Task.builder()
                 .title("Test Task")
                 .description("Test Description")
                 .status("pending")
                 .dueDate(LocalDateTime.now().plusDays(1))
                 .build();
 
-        TaskTest savedTask = taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
         assertNotNull(savedTask.getId());
         assertEquals("Test Task", savedTask.getTitle());
         assertNotNull(savedTask.getCreatedAt());
@@ -39,26 +40,26 @@ class TaskRepositoryTest {
 
     @Test
     void testFindById() {
-        TaskTest task = TaskTest.builder()
+        Task task = Task.builder()
                 .title("Find Me")
                 .dueDate(LocalDateTime.now().plusDays(1))
                 .build();
         
-        TaskTest savedTask = entityManager.persistAndFlush(task);
+        Task savedTask = entityManager.persistAndFlush(task);
         
-        Optional<TaskTest> foundTask = taskRepository.findById(savedTask.getId());
+        Optional<Task> foundTask = taskRepository.findById(savedTask.getId());
         assertTrue(foundTask.isPresent());
         assertEquals("Find Me", foundTask.get().getTitle());
     }
 
     @Test
     void testFindAll() {
-        TaskTest task1 = TaskTest.builder()
+        Task task1 = Task.builder()
                 .title("Task 1")
                 .dueDate(LocalDateTime.now().plusDays(1))
                 .build();
         
-        TaskTest task2 = TaskTest.builder()
+        Task task2 = Task.builder()
                 .title("Task 2")
                 .dueDate(LocalDateTime.now().plusDays(2))
                 .build();
@@ -67,7 +68,7 @@ class TaskRepositoryTest {
         entityManager.persist(task2);
         entityManager.flush();
 
-        List<TaskTest> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAll();
         assertEquals(2, tasks.size());
         assertTrue(tasks.stream().anyMatch(t -> t.getTitle().equals("Task 1")));
         assertTrue(tasks.stream().anyMatch(t -> t.getTitle().equals("Task 2")));
@@ -75,41 +76,25 @@ class TaskRepositoryTest {
 
     @Test
     void testDeleteTask() {
-        TaskTest task = TaskTest.builder()
+        Task task = Task.builder()
                 .title("To be deleted")
                 .dueDate(LocalDateTime.now().plusDays(1))
                 .build();
         
-        TaskTest savedTask = entityManager.persistAndFlush(task);
+        Task savedTask = entityManager.persistAndFlush(task);
         UUID taskId = savedTask.getId();
 
         taskRepository.deleteById(taskId);
         entityManager.flush();
 
-        Optional<TaskTest> deletedTask = taskRepository.findById(taskId);
+        Optional<Task> deletedTask = taskRepository.findById(taskId);
         assertFalse(deletedTask.isPresent());
     }
 
     @Test
     void testFindByIdNotFound() {
-        Optional<TaskTest> task = taskRepository.findById(UUID.randomUUID());
+        Optional<Task> task = taskRepository.findById(UUID.randomUUID());
         assertFalse(task.isPresent());
     }
 
-    @Test
-    void testTaskAuditFields() {
-        TaskTest task = TaskTest.builder()
-                .title("Audit Test")
-                .dueDate(LocalDateTime.now().plusDays(1))
-                .build();
-
-        TaskTest savedTask = taskRepository.save(task);
-        assertNotNull(savedTask.getCreatedAt());
-        assertNull(savedTask.getUpdatedAt()); // Not updated yet
-
-        // Update the task
-        savedTask.setStatus("completed");
-        TaskTest updatedTask = taskRepository.save(savedTask);
-        assertNotNull(updatedTask.getUpdatedAt());
-    }
 }

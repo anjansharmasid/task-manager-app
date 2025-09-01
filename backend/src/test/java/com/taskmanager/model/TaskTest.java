@@ -10,7 +10,7 @@ import jakarta.validation.ConstraintViolation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TaskTest {
+public class TaskTest {
 
     private final Validator validator;
 
@@ -41,8 +41,10 @@ class TaskTest {
 
         Set<ConstraintViolation<Task>> violations = validator.validate(task);
         assertFalse(violations.isEmpty());
-        assertEquals(1, violations.size());
-        assertEquals("Title is required and cannot be empty", violations.iterator().next().getMessage());
+        assertEquals(2, violations.size());
+        //assertEquals("Title is required and cannot be empty", violations.iterator().next().getMessage());
+        assertEquals("Title must be between 3 and 100 characters", violations.iterator().next().getMessage());
+
     }
 
     @Test

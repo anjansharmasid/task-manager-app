@@ -18,21 +18,21 @@ public class GlobalExceptionHandler {
 
     // Handle validation errors from @Valid
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseTest> handleValidationExceptions(
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(
             MethodArgumentNotValidException ex, WebRequest request) {
         
-        List<ErrorResponseTest.FieldError> fieldErrors = ex.getBindingResult()
+        List<ErrorResponse.FieldError> fieldErrors = ex.getBindingResult()
                 .getAllErrors()
                 .stream()
                 .map(error -> {
                     String fieldName = ((FieldError) error).getField();
                     String errorMessage = error.getDefaultMessage();
                     Object rejectedValue = ((FieldError) error).getRejectedValue();
-                    return new ErrorResponseTest.FieldError(fieldName, errorMessage, rejectedValue);
+                    return new ErrorResponse.FieldError(fieldName, errorMessage, rejectedValue);
                 })
                 .collect(Collectors.toList());
 
-        ErrorResponseTest errorResponse = new ErrorResponseTest(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Validation Failed",
@@ -46,20 +46,20 @@ public class GlobalExceptionHandler {
 
     // Handle constraint violation exceptions
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResponseTest> handleConstraintViolationException(
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(
             ConstraintViolationException ex, WebRequest request) {
         
-        List<ErrorResponseTest.FieldError> fieldErrors = ex.getConstraintViolations()
+        List<ErrorResponse.FieldError> fieldErrors = ex.getConstraintViolations()
                 .stream()
                 .map(violation -> {
                     String fieldName = violation.getPropertyPath().toString();
                     String errorMessage = violation.getMessage();
                     Object rejectedValue = violation.getInvalidValue();
-                    return new ErrorResponseTest.FieldError(fieldName, errorMessage, rejectedValue);
+                    return new ErrorResponse.FieldError(fieldName, errorMessage, rejectedValue);
                 })
                 .collect(Collectors.toList());
 
-        ErrorResponseTest errorResponse = new ErrorResponseTest(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Constraint Violation",
@@ -72,11 +72,11 @@ public class GlobalExceptionHandler {
     }
 
     // Handle resource not found exceptions
-    @ExceptionHandler(ResourceNotFoundExceptionTest.class)
-    public ResponseEntity<ErrorResponseTest> handleResourceNotFoundException(
-            ResourceNotFoundExceptionTest ex, WebRequest request) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(
+            ResourceNotFoundException ex, WebRequest request) {
         
-        ErrorResponseTest errorResponse = new ErrorResponseTest(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
                 "Resource Not Found",
@@ -89,10 +89,10 @@ public class GlobalExceptionHandler {
 
     // Handle all other exceptions
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponseTest> handleGlobalException(
+    public ResponseEntity<ErrorResponse> handleGlobalException(
             Exception ex, WebRequest request) {
         
-        ErrorResponseTest errorResponse = new ErrorResponseTest(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal Server Error",
@@ -105,10 +105,10 @@ public class GlobalExceptionHandler {
 
     // Handle illegal argument exceptions
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponseTest> handleIllegalArgumentException(
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(
             IllegalArgumentException ex, WebRequest request) {
         
-        ErrorResponseTest errorResponse = new ErrorResponseTest(
+        ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Invalid Argument",
