@@ -1,8 +1,9 @@
+The backend is a java spring-boot 3.5 application
+
 System requirements:
 - GIT client
 - Java 17 +
 - Maven 3.5
-
 
 How to install the application:
 - Clone repo:   git clone https://github.com/anjansharmasid/task-manager-app.git
@@ -13,15 +14,25 @@ How to install the application:
   -  mvn clean package
   -  java -jar target/task-manager-1.0.0.jar 
 
+Authentication :No authentication is required for this API (development version).
+H2 Database Console will be available at : http://localhost:8080/h2-console (JDBC URL: jdbc:h2:mem:testdb)
+
+For API documentation:
+  - cd backend
+    - mvn spring-boot:run
+      Then access the Swagger UI at:
+      - Swagger UI: http://localhost:8080/swagger-ui.html
+      - OpenAPI JSON: http://localhost:8080/v3/api-docs
+      - OpenAPI YAML: http://localhost:8080/v3/api-docs.yaml
+
 
 How to use these REST APIs:
 Use any REST API client with the example urls and sample payload.
 
-
-Base URL: http://localhost:8080/api/tasks
-Authentication :No authentication is required for this API (development version).
-
 API Endpoints
+
+Base URL: http://localhost:8080/v1/api/tasks
+ 
 
 1. Get All Tasks
    Retrieve a list of all tasks.
@@ -30,7 +41,8 @@ API Endpoints
    Success Response: 200 OK
    Error Response: 500 Internal Server Error
 
-   EX: curl -X GET http://localhost:8080/api/tasks
+   EX: curl -X GET http://localhost:8080/v1/api/tasks
+
 
 2. Get Task by ID
    Retrieve a specific task by its UUID.
@@ -40,7 +52,7 @@ API Endpoints
    Success Response: 200 OK
    Error Response: 404 Not Found if task doesn't exist
 
-   EX: curl -X GET http://localhost:8080/api/tasks/123e4567-e89b-12d3-a456-426614174000
+   EX: curl -X GET http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000
 
 
 3. Create a New Task
@@ -69,7 +81,7 @@ API Endpoints
    in-progress
    completed
 
-   EX: curl -X POST http://localhost:8080/api/tasks \
+   EX: curl -X POST http://localhost:8080/v1/api/tasks \
    -H "Content-Type: application/json" \
    -d '{
    "title": "Learn Spring Boot",
@@ -96,8 +108,9 @@ API Endpoints
    "status": "completed",
    "dueDate": "2025-12-20T12:00:00"
    }
+
    
-5. EX: curl -X PUT http://localhost:8080/api/tasks/123e4567-e89b-12d3-a456-426614174000 \
+5. EX: curl -X PUT http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000 \
    -H "Content-Type: application/json" \
    -d '{
    "title": "Updated Task Title",
@@ -106,7 +119,8 @@ API Endpoints
    "dueDate": "2025-12-20T12:00:00"
    }'
 
-6. Update Task Status Only
+
+6.Update Task Status Only
    Update only the status of a task.
    URL: /{id}/status
    Method: PATCH
@@ -123,9 +137,7 @@ API Endpoints
      in-progress
      completed
 
-    EX:curl -X PATCH "http://localhost:8080/api/tasks/123e4567-e89b-12d3-a456-426614174000/status?status=completed"
-
-
+    EX:curl -X PATCH "http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000/status?status=completed"
 
 7. Delete a Task
    Delete a specific task by its UUID.
@@ -135,8 +147,7 @@ API Endpoints
    Success Response: 200 OK
    Error Response: 404 Not Found if task doesn't exist
 
-   EX:curl -X DELETE http://localhost:8080/api/tasks/123e4567-e89b-12d3-a456-426614174000
-
+   EX:curl -X DELETE http://localhost:8080/v1/api/tasks/123e4567-e89b-12d3-a456-426614174000
 
    Error Responses
    Validation Error (400 Bad Request)  

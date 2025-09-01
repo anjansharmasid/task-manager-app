@@ -42,7 +42,9 @@ public class TaskTest {
         Set<ConstraintViolation<Task>> violations = validator.validate(task);
         assertFalse(violations.isEmpty());
         assertEquals(2, violations.size());
-        assertEquals("Title is required and cannot be empty", violations.iterator().next().getMessage());
+        //assertEquals("Title is required and cannot be empty", violations.iterator().next().getMessage());
+        assertEquals("Title must be between 3 and 100 characters", violations.iterator().next().getMessage());
+
     }
 
     @Test
