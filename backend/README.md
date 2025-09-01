@@ -120,7 +120,7 @@ Base URL: http://localhost:8080/v1/api/tasks
    }'
 
 
-6.Update Task Status Only
+6. Update Task Status Only
    Update only the status of a task.
    URL: /{id}/status
    Method: PATCH
@@ -157,18 +157,17 @@ Base URL: http://localhost:8080/v1/api/tasks
    "message": "One or more fields have validation errors",
    "path": "/api/tasks",
    "fieldErrors": [
-   {
-   "field": "title",
-   "message": "Title is required and cannot be empty",
-   "rejectedValue": ""
-   },
-   {
-   "field": "dueDate",
-   "message": "Due date must be in the future",
-   "rejectedValue": "2022-01-01T00:00:00"
-   }
-   ]
-   }
+     {
+       "field": "title",
+       "message": "Title is required and cannot be empty",
+       "rejectedValue": ""
+     },
+     {
+       "field": "dueDate",
+       "message": "Due date must be in the future",
+       "rejectedValue": "2022-01-01T00:00:00"
+     }
+   ]}
 
    Not Found Error (404 Not Found)
    {
