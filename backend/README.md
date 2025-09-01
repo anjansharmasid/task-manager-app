@@ -5,7 +5,9 @@ System requirements:
 
 
 How to install the application:
-- Change location to where pom.xml is present
+- Clone repo:   git clone https://github.com/anjansharmasid/task-manager-app.git
+- Change location to cd task-manager-app/backend/
+- verify that pom.xml is present in this directory
 - command to compile: mvn clean install
 - command to run:
   -  mvn clean package
