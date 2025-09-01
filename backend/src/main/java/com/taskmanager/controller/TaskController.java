@@ -1,8 +1,8 @@
 package com.taskmanager.controller;
 
-import com.taskmanager.exception.ResourceNotFoundExceptionTest;
-import com.taskmanager.model.TaskTest;
-import com.taskmanager.repository.TaskRepositoryTest;
+import com.taskmanager.exception.ResourceNotFoundException;
+import com.taskmanager.model.Task;
+import com.taskmanager.repository.TaskRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,50 +17,50 @@ import java.util.UUID;
 public class TaskController {
     
     @Autowired
-    private TaskRepositoryTest taskRepository;
+    private TaskRepository taskRepository;
     
     // Get all tasks
     @GetMapping
-    public List<TaskTest> getAllTasks() {
+    public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
     
     // Get task by ID
     @GetMapping("/{id}")
-    public ResponseEntity<TaskTest> getTaskById(@PathVariable UUID id) {
-        TaskTest task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundExceptionTest("Task", "id", id));
+    public ResponseEntity<Task> getTaskById(@PathVariable UUID id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task", "id", id));
         return ResponseEntity.ok(task);
     }
     
     // Create a new task
     @PostMapping
-    public ResponseEntity<TaskTest> createTask(@Valid @RequestBody TaskTest task) {
-        TaskTest savedTask = taskRepository.save(task);
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
+        Task savedTask = taskRepository.save(task);
         return ResponseEntity.status(201).body(savedTask);
     }
     
     // Update task
     @PutMapping("/{id}")
-    public ResponseEntity<TaskTest> updateTask(
+    public ResponseEntity<Task> updateTask(
             @PathVariable UUID id, 
-            @Valid @RequestBody TaskTest taskDetails) {
+            @Valid @RequestBody Task taskDetails) {
         
-        TaskTest task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundExceptionTest("Task", "id", id));
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task", "id", id));
         
         task.setTitle(taskDetails.getTitle());
         task.setDescription(taskDetails.getDescription());
         task.setStatus(taskDetails.getStatus());
         task.setDueDate(taskDetails.getDueDate());
         
-        TaskTest updatedTask = taskRepository.save(task);
+        Task updatedTask = taskRepository.save(task);
         return ResponseEntity.ok(updatedTask);
     }
     
     // Update task status only
     @PatchMapping("/{id}/status")
-    public ResponseEntity<TaskTest> updateTaskStatus(
+    public ResponseEntity<Task> updateTaskStatus(
             @PathVariable UUID id, 
             @RequestParam String status) {
         
@@ -68,19 +68,19 @@ public class TaskController {
             throw new IllegalArgumentException("Invalid status value. Must be one of: pending, in-progress, completed");
         }
         
-        TaskTest task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundExceptionTest("Task", "id", id));
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task", "id", id));
         
         task.setStatus(status);
-        TaskTest updatedTask = taskRepository.save(task);
+        Task updatedTask = taskRepository.save(task);
         return ResponseEntity.ok(updatedTask);
     }
     
     // Delete a task
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable UUID id) {
-        TaskTest task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundExceptionTest("Task", "id", id));
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task", "id", id));
         
         taskRepository.delete(task);
         return ResponseEntity.ok().build();
