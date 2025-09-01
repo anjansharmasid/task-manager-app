@@ -58,8 +58,8 @@ public class Task {
     }
     
     // Custom builder method for easier object creation
-    public static TaskTest create(String title, String description, LocalDateTime dueDate) {
-        return TaskTest.builder()
+    public static Task create(String title, String description, LocalDateTime dueDate) {
+        return Task.builder()
                 .title(title)
                 .description(description)
                 .dueDate(dueDate)

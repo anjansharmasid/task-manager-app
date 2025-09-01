@@ -1,0 +1,6 @@
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/exception/ErrorResponseTest.java
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/model/TaskTest.java
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/exception/GlobalExceptionHandlerTest.java
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/exception/ResourceNotFoundExceptionTest.java
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/repository/TaskRepositoryTest.java
+/Users/ashar176/task-manager-app/backend/src/test/java/com/taskmanager/controller/TaskControllerTest.java

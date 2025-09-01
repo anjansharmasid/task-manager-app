@@ -1,0 +1,6 @@
+com/taskmanager/exception/GlobalExceptionHandlerTest.class
+com/taskmanager/exception/ErrorResponseTest.class
+com/taskmanager/controller/TaskControllerTest.class
+com/taskmanager/exception/ResourceNotFoundExceptionTest.class
+com/taskmanager/repository/TaskRepositoryTest.class
+com/taskmanager/model/TaskTest.class

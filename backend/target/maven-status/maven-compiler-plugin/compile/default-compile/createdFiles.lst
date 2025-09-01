@@ -1,0 +1,9 @@
+com/taskmanager/exception/ErrorResponse.class
+com/taskmanager/exception/ErrorResponse$FieldError.class
+com/taskmanager/repository/TaskRepository.class
+com/taskmanager/model/Task.class
+com/taskmanager/exception/ResourceNotFoundException.class
+com/taskmanager/exception/GlobalExceptionHandler.class
+com/taskmanager/TaskManagerApplication.class
+com/taskmanager/controller/TaskController.class
+com/taskmanager/model/Task$TaskBuilder.class
