@@ -18,9 +18,8 @@ Authentication :No authentication is required for this API (development version)
 H2 Database Console will be available at : http://localhost:8080/h2-console (JDBC URL: jdbc:h2:mem:testdb)
 
 For API documentation:
-  - cd backend
-    - mvn spring-boot:run
-      Then access the Swagger UI at:
+  When the spring-boot application is running 
+      then access the Swagger UI at:
       - Swagger UI: http://localhost:8080/swagger-ui.html
       - OpenAPI JSON: http://localhost:8080/v3/api-docs
       - OpenAPI YAML: http://localhost:8080/v3/api-docs.yaml
