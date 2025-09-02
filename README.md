@@ -1,6 +1,6 @@
 The backend and frontend folders contain backend and frontend code, respectively.
 
-**Backend API : **
+**Backend API:**
 
 The backend should be able to:
 Create a task with the following properties:
@@ -26,6 +26,7 @@ Display tasks in a user-friendly interface
 
 The frontend is written in React.js 
 Documentation on how to install and run the React frontend is found here https://github.com/anjansharmasid/task-manager-app/blob/main/frontend/README.md
+
 
 
 
