@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import { useTasks } from './hooks/useTasks';
+import { Task } from './types/task';
 import './App.css';
 
 function App() {
@@ -17,21 +18,23 @@ function App() {
     deleteTask
   } = useTasks();
 
-  const [editingTask, setEditingTask] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [showForm, setShowForm] = useState<boolean>(false);
 
-  const handleCreateTask = async (taskData) => {
+  const handleCreateTask = async (taskData: any) => {
     await createTask(taskData);
     setShowForm(false);
   };
 
-  const handleUpdateTask = async (taskData) => {
-    await updateTask(editingTask.id, taskData);
-    setEditingTask(null);
-    setShowForm(false);
+  const handleUpdateTask = async (taskData: any) => {
+    if (editingTask) {
+      await updateTask(editingTask.id, taskData);
+      setEditingTask(null);
+      setShowForm(false);
+    }
   };
 
-  const handleEdit = (task) => {
+  const handleEdit = (task: Task) => {
     setEditingTask(task);
     setShowForm(true);
   };
@@ -49,6 +52,7 @@ function App() {
           onClick={() => setShowForm(true)}
           style={styles.addButton}
           disabled={showForm}
+          type="button"
         >
           + Add New Task
         </button>
