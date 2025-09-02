@@ -27,7 +27,7 @@ const TaskList: React.FC<TaskListProps> = ({
   if (loading) {
     return (
       <div style={styles.loading}>
-        <div style={styles.spinner}></div>
+        <div style={styles.spinner} data-testid="spinner"></div>
         <p>Loading tasks...</p>
       </div>
     );
