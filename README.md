@@ -28,6 +28,9 @@ The frontend is written in React.js
 Documentation on how to install and run the React frontend is found here https://github.com/anjansharmasid/task-manager-app/blob/main/frontend/README.md
 
 
+Note: For the frontend code to work properly the backend spring boot REST service should be running.
+
+
 
 
 
