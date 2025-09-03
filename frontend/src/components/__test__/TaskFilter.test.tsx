@@ -4,7 +4,7 @@ import TaskFilter from '../TaskFilter';
 
 const TASK_STATUS = {
   PENDING: 'pending',
-  IN_PROGRESS: 'in-progress', // ✅ Fixed
+  IN_PROGRESS: 'in-progress', 
   COMPLETED: 'completed'
 };
 
@@ -48,6 +48,7 @@ describe('TaskFilter Component', () => {
 
     const activeButton = screen.getByText('Completed');
     expect(activeButton).toHaveStyle('background-color: #007bff');
-    expect(activeButton).toHaveStyle('color: rgb(255, 255, 255)'); // ✅ Fixed
+    expect(activeButton).toHaveStyle('color: rgb(255, 255, 255)'); 
   });
 });
+
