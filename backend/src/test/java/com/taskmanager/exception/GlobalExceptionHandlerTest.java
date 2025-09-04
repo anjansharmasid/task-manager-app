@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT) // Add this annotation
+@MockitoSettings(strictness = Strictness.LENIENT) 
 class GlobalExceptionHandlerTest {
 
     @InjectMocks
